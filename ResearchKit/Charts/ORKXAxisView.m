@@ -2,7 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
-
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -29,7 +29,7 @@
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-// hi
+
 
 #import "ORKXAxisView.h"
 
@@ -156,7 +156,7 @@ static const CGFloat LastLabelHeight = 20.0;
     if ([_parentGraphChartView.dataSource respondsToSelector:@selector(graphChartView:titleForXAxisAtPointIndex:)]) {
         _titleLabels = [NSMutableArray new];
         _titleTickLayers = [NSMutableArray new];
-
+        
         NSInteger numberOfTitleLabels = _parentGraphChartView.numberOfXAxisPoints;
         for (NSInteger i = 0; i < numberOfTitleLabels; i++) {
             NSString *title = [_parentGraphChartView.dataSource graphChartView:_parentGraphChartView titleForXAxisAtPointIndex:i];
@@ -168,15 +168,18 @@ static const CGFloat LastLabelHeight = 20.0;
             label.adjustsFontSizeToFitWidth = YES;
             label.minimumScaleFactor = 0.7;
             label.translatesAutoresizingMaskIntoConstraints = NO;
+            label.backgroundColor = [UIColor whiteColor];
+            label.layer.backgroundColor = [UIColor whiteColor].CGColor;
+            label.textColor = self.tintColor;
             
-            if (i < (numberOfTitleLabels - 1)) {
-                label.textColor = self.tintColor;
-            } else {
-                label.textColor = [UIColor whiteColor];
-                label.backgroundColor = self.tintColor;
-                label.layer.cornerRadius = LastLabelHeight * 0.5;
-                label.layer.masksToBounds = YES;
-            }
+            //            if (i < (numberOfTitleLabels - 1)) {
+            //                label.textColor = self.tintColor;
+            //            } else {
+            //                label.textColor = [UIColor whiteColor];
+            //                label.backgroundColor = self.tintColor;
+            //                label.layer.cornerRadius = LastLabelHeight * 0.5;
+            //                label.layer.masksToBounds = YES;
+            //            }
             
             [self addSubview:label];
             [_titleLabels addObject:label];
@@ -188,11 +191,11 @@ static const CGFloat LastLabelHeight = 20.0;
             CGFloat positionOnXAxis = xAxisPoint(i, numberOfTitleLabels, self.bounds.size.width);
             titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphChartViewAxisTickLength, 1, ORKGraphChartViewAxisTickLength);
             titleTickLayer.backgroundColor = _axisColor.CGColor;
-
+            
             [self.layer addSublayer:titleTickLayer];
             [_titleTickLayers addObject:titleTickLayer];
         }
-
+        
         [self setUpConstraints];
     }
 }
@@ -205,7 +208,7 @@ static const CGFloat LastLabelHeight = 20.0;
             label.textColor = self.tintColor;
         } else {
             label.textColor = [UIColor whiteColor];
-            label.backgroundColor = self.tintColor;
+            label.backgroundColor = [UIColor clearColor];
         }
     }
 }
