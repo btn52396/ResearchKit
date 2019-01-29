@@ -567,7 +567,7 @@ ORK_INLINE CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, CGF
         CGFloat plotViewHeight = _plotView.bounds.size.height;
         CGFloat plotViewWidth = _plotView.bounds.size.width;
         NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
-        for (NSUInteger pointIndex = 1; pointIndex < numberOfXAxisPoints; pointIndex++) {
+        for (NSUInteger pointIndex = 0; pointIndex < numberOfXAxisPoints; pointIndex++) {
             if (![_dataSource respondsToSelector:@selector(graphChartView:drawsVerticalReferenceLineAtPointIndex:)]
                 || [_dataSource graphChartView:self drawsVerticalReferenceLineAtPointIndex:pointIndex]) {
                 CALayer *verticalReferenceLineLayer = graphVerticalReferenceLineLayerWithColor(_referenceLineColor, plotViewHeight);
