@@ -69,6 +69,16 @@ ORK_AVAILABLE_DECL
 - (void)graphChartView:(ORKGraphChartView *)graphChartView touchesMovedToXPosition:(CGFloat)xPosition;
 
 /**
+ Notifies the delegate of the plot index of an ongoing pan gesture within the bounds
+ of an `ORKGraphChartView` object.
+ 
+ @param graphChartView      The graph chart view object in which the gesture occurred.
+ @param plotIndex           The plot index of the ongoing pan gesture.
+ */
+- (void)graphChartView:(ORKGraphChartView *)graphChartView plotIndex:(NSInteger)plotIndex;
+
+
+/**
  Notifies the delegate that a pan gesture that began within the bounds of an `ORKGraphChartView`
  object has ended.
 

@@ -750,6 +750,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
         CGFloat normalizedX = MAX(MIN(location.x, maxX), 0);
         location = CGPointMake(normalizedX, location.y);
         CGFloat snappedXPosition = [self snappedXPosition:location.x plotIndex:scrubbingPlotIndex];
+        NSInteger pointIndex = [self pointIndexForXPosition:snappedXPosition plotIndex:scrubbingPlotIndex];
         [self updateScrubberViewForXPosition:snappedXPosition plotIndex:scrubbingPlotIndex];
         
         if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
@@ -760,6 +761,9 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
         } else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
             if ([_delegate respondsToSelector:@selector(graphChartView:touchesMovedToXPosition:)]) {
                 [_delegate graphChartView:self touchesMovedToXPosition:snappedXPosition];
+            }
+            if ([_delegate respondsToSelector:@selector(graphChartView:plotIndex:)]) {
+                [_delegate graphChartView:self plotIndex:pointIndex];
             }
         } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
             [self setScrubberViewsHidden:YES animated:YES];
